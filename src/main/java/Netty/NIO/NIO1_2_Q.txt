@@ -1,0 +1,8 @@
+Q：selector.select();阻塞，那为什么说nio是非阻塞的IO？
+A：1、我们关注一个IO是否阻塞，主要是read的时候能否立马返回，即没有数据的化也能立即返回。传统的IO是会阻塞在哪里的。
+并且该方法也可以不阻塞：selector.select(1000);不阻塞
+   2、selector.wakeup();也可以唤醒selector
+   3、selector.selectNow();也可以立马返还
+
+Q：SelectionKey.OP_WRITE是代表什么意思
+A：OP_WRITE表示底层缓冲区是否有空间，是则响应返还true
