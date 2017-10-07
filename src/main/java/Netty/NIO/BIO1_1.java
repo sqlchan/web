@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * Created by Administrator on 2017/10/7.
  * 传统socket服务端
  * 用客户端Telnet进行模拟，打开Telnet客户端  telnet 127.0.0.1 10101
- * 传统的IOsocket有两个阻塞点，`server.accept();``inputStream.read(bytes);`
+ * 传统的IOsocket有两个阻塞点，`Server.accept();``inputStream.read(bytes);`
  * 单线程情况下只能有一个客户端,用线程池可以有多个客户端连接，但是非常消耗性能
  */
 public class BIO1_1 {
