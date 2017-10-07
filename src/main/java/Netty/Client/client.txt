@@ -1,0 +1,5 @@
+2、netty客户端hello world案例
+
+Q；channelDisconnected与channelClosed的区别？
+A：channelDisconnected只有在连接建立后断开才会调用
+   channelClosed无论连接是否成功都会调用关闭资源
