@@ -1,0 +1,16 @@
+netty工作原理源码分析
+
+Q：我们如何提高NIO的工作效率
+A：
+
+Q：一个NIO是不是只能有一个selector？
+A：不是，一个系统可以有多个selector
+
+Q：selector是不是只能注册一个ServerSocketChannel？
+A：不是，可以注册多个
+
+code:
+//获取workeres中的worker，原子类一直递增，求模。1,2,3,1,2,3
+public worker nextworker(){
+    return workeres[Math.abs(workerIndex.getAndIncrement()%workers.length)];
+}

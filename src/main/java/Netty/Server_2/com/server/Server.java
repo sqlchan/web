@@ -1,4 +1,4 @@
-package Netty.Server.com.server;
+package Netty.Server_2.com.server;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.ChannelPipeline;

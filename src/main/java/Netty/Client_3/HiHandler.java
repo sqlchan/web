@@ -1,21 +1,18 @@
-package Netty.Server.com.server;
+package Netty.Client_3;
 
 import org.jboss.netty.channel.*;
 
 /**
  * 消息接受处理类
  */
-public class HelloHandler extends SimpleChannelHandler{
+public class HiHandler extends SimpleChannelHandler {
+
     //接收消息
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
-        //网络传输的是字节流，netty用channelbuffer包装起来，字节流转换为string，才能打印
-        //ChannelBuffer message= (ChannelBuffer) e.getMessage();
         String s = (String) e.getMessage();
         System.out.println(s);
 
-        //回写数据
-        ctx.getChannel().write("hi");
         super.messageReceived(ctx, e);
     }
 
@@ -47,3 +44,4 @@ public class HelloHandler extends SimpleChannelHandler{
         super.channelClosed(ctx, e);
     }
 }
+

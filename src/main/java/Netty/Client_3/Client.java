@@ -1,4 +1,4 @@
-package Netty.Client;
+package Netty.Client_3;
 
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.*;
