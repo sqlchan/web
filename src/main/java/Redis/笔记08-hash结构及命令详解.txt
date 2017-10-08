@@ -1,0 +1,12 @@
+hset key field value    把key中 filed域的值设为value
+hmset key field1 value1 field2 value2
+hget key field      返回key中field域的值
+hmget key field1 field2
+hgetall key     返回key中,所有域与其值
+hdel key field      删除key中 field域
+hlen key    返回key中元素的数量
+hexists key field   判断key中有没有field域
+hinrby key field value      是把key中的field域的值增长整型值value
+hinrby float  key field value   是把key中的field域的值增长浮点值valu
+hkeys key   返回key中所有的field
+kvals key   返回key中所有的value

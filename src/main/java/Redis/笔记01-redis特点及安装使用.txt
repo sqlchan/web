@@ -1,0 +1,49 @@
+学习目标：
+    1:redis特点及安装
+    2:redis键值操作
+    3:redis数据类型[string,link,set,order set, hash]
+    4:事务
+    5:消息订阅
+    6:持久化
+    7:集群
+    8:PHP-redis客户端
+    9: 运维
+    10: 仿微博实战
+
+Q：redis特点介绍
+A：REmote DIctionary Server(Redis) 是开源,BSD许可,高级的key-value存储系统。可以用来存储字符串,哈希结构,链表,集合,因此,常用来提供数据结构服务。
+
+下载：
+1:cd /usr/local/src/
+    wget 下载地址
+    ls
+2:解压：tar zxvf redis...
+    cd redis...
+    ls
+    make
+    make test
+        tcl 8.5 :  yum install tcl
+3:指定安装目录：make PREFIX=/usr/local/redis install
+    cd /usr/local/redis
+    ls
+    ls bin
+        redis-benchmark  性能测试工具
+        redis-check-aof  日志文件检测工(比如断电造成日志损坏,可以检测并修复)
+        redis-check-dump  快照文件检测工具,效果类上
+        redis-cli  客户端
+        redis-server 服务端
+4:复制配置文件：源代码的配置文件复制到当前目录来：
+    cp /usr/local/src/redis.../redis.conf ./
+    ls
+5:启动  启动redis-server程序，使用当前目录下的conf文件。
+    ./bin/redis-server ./redis.conf
+6:再打开一个终端端口进行连接
+    cd /usr/local/redis../
+    ./bin/redis-cli
+7:redis在后台运行
+    vim redis.conf   (gedit)
+        daemonize yes
+    ps aux|grep redis   看redis后台进程
+
+
+

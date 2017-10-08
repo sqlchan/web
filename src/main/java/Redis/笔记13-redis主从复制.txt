@@ -1,0 +1,57 @@
+cp redis.conf  redis6380.conf
+cp redis.conf  redis6381.conf
+pkill -9 redis  //先杀一下所有的进程
+    6380/6381按星型配置到6379
+配置从服务器：
+    指明各自的配置文件，6380开启RDB，
+    pidfile /var/run/redis6380.pid
+    port 6380
+    dbfilename dump6380.rdb
+    slaveof localhost 6379   //打开从服务器，配置相应的主服务器，IP、端口号
+    salve-read-only yes
+    6381屏蔽rdb的三个选项、aof：appendonly no ;
+
+连接从服务器：./bin/redis-cli -p 6380
+
+配置密码：
+    主服务器：requirepass passwd
+    进入之后：auth passwd
+
+redis的主从配置，也就是redis的集群
+
+集群的作用
+    1:  主从备份 防止主机宕机
+    2:  读写分离,分担master的任务
+    3:  任务分离,如从服分别分担备份工作与计算工作
+
+redis集群方式：
+    第2种方式的好处:master宕机后,可以直接切换到slave1
+
+主从通信过程：
+    从：sync[自动]
+    主：dump出rdb
+    主：缓冲的aof
+    主：replicationFeedSlaves通过进程保持联系
+
+Master配置:
+    1:关闭rdb快照(备份工作交给slave)
+    2:可以开启aof
+
+slave配置:
+    1: 声明slave-of
+    2: 配置密码[如果master有密码]
+    3: [某1个]slave打开 rdb快照功能
+    4: 配置是否只读[slave-read-only]
+
+缺陷:
+    每次salave断开后,(无论是主动断开,还是网络故障),再连接master都要master全部dump出来rdb,再aof,即同步的过程都要重新执行1遍.所以要记住---多台slave不要一下都启动起来,否则master可能IO剧增
+
+运行时更改master-slave
+    修改一台slave(设为A)为new master
+    1)命令该服务不做其他redis服务的slave
+       命令: slaveof no one
+    2)修改其readonly为yes
+
+其他的slave再指向new master A
+1)命令该服务为new master A的slave
+   命令格式 slaveof IP port

@@ -1,0 +1,29 @@
+set key value [ex 秒数] / [px 毫秒数]  [nx] /[xx]
+nx: 表示key不存在时,执行操作
+xx: 表示key存在时,执行操作
+
+mset  multi set , 一次性设置多个键值
+
+get key     作用:获取key的值
+mget key1 key2 ..keyn   作用:获取多个key的值
+
+setrange key offset value      把字符串的offset偏移字节,改成value  如果偏移量>字符长度, 该字符自动补0x00
+
+append key value    作用: 把value追加到key的原值上
+getrange key start stop     是获取字符串中 [start, stop]范围的值，对于字符串的下标,左数从0开始,右数从-1开始
+
+getset key newvalue     作用: 获取并返回旧值,设置新值
+
+incr key    指定的key的值加1,并返回加1后的值
+incrby key number
+incrbyfloat key floatnumber
+decr key
+decrby key number
+
+getbit key offset   获取值的二进制表示,对应位上的值(从左,从0编号)
+setbit  key offset value    设置offset对应二进制位上的值，返回: 该位上的旧值
+offset最大2^32-1,可推出最大的的字符串为512M
+
+bitop operation destkey key1 [key2 ...]
+
+

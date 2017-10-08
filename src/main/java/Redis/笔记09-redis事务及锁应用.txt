@@ -1,0 +1,24 @@
+Redis支持简单的事务
+	    Mysql	            Redis
+开启	    start transaction	muitl
+语句	    普通sql	            普通命令
+失败	    rollback 回滚	    discard 取消
+成功	    commit	            exec
+
+    如果已经成功执行了2条语句, 第3条语句出错.
+    Rollback后,前2条的语句影响消失.
+    Discard只是结束本次事务,前2条语句造成的影响仍然还在
+
+mutil后面的语句中, 语句出错可能有2种情况
+    1: 语法就有问题,这种,exec时,报错, 所有语句得不到执行
+    2: 语法本身没错,但适用对象有问题. 比如 zadd 操作list对象
+        Exec之后,会执行正确的语句,并跳过有不适当的语句
+
+Redis的事务中,启用的是乐观锁,只负责监测key没有被改动
+watch命令
+    watch key1 key2  ... keyN
+    作用:监听key1 key2..keyN有没有变化,如果有变, 则事务取消
+
+unwatch
+    作用: 取消所有watch监听
+
